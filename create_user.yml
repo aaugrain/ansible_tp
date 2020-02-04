@@ -4,7 +4,6 @@
   vars:
    username:    ansible
    groupname:    ansible
-
   tasks:
   - name:    create a group
     group:
