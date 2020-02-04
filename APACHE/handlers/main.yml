@@ -1,0 +1,7 @@
+---
+# handlers file for test-role-1
+- name: restart web services
+  service:
+   name: httpd
+   state: restarted
+  listen: "restart httpd"

@@ -10,7 +10,7 @@
      state: latest
   - name: template config file switch_port.j2
     template:
-     src: /home/vagrant/ansible/switch_port.j2
+     src: switch_port.j2
      dest: /etc/httpd/conf/httpd.conf
     notify:
      - restart httpd

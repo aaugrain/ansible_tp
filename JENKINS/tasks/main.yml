@@ -1,0 +1,9 @@
+---
+# tasks file for JENKINS
+
+- name: install jenkins
+  yum:
+   name: jenkins
+   state: latest
+  notify:
+   - restart jenkins
