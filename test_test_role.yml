@@ -1,5 +1,5 @@
 ---
 - hosts: localhost
   become: yes
-  roles: 
-   - JENKINS
+  roles:
+   - test_role

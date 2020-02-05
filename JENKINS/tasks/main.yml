@@ -1,9 +1,44 @@
 ---
 # tasks file for JENKINS
-
-- name: install jenkins
+- name: Java install
   yum:
+   name: java-1.8.0-openjdk-devel
+- name: creation /usr/lib/jenkins
+  file:
+   path: /usr/lib/jenkins
+   state: directory
+   mode: '0755'
+- name: creation /data/jenkins
+  file:
+   path: /data/jenkins
+   state: directory
+- name: creation group jenkins
+  group:
    name: jenkins
-   state: latest
-  notify:
-   - restart jenkins
+   state: present
+- name: creation user jenkins
+  user:
+   name: jenkins
+   password: '???'
+   state: present
+   system: yes
+   create_home: yes
+   home: /data/jenkins
+- name: download jenkins.war
+  get_url: 
+   url: http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+   dest: /usr/lib/jenkins
+- name: creation jenkins.service
+  template:
+   src: jenkins.service.j2
+   dest: /etc/systemd/system/jenkins.service
+- name: systemctl start jenkins
+  systemd:
+   state: started
+   name: jenkins
+   enabled: yes
+#- name:
+#  systemd:
+#   name: jenkins
+#   enabled: yes
+

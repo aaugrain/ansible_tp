@@ -1,5 +1,5 @@
 ---
-# handlers file for test-role-1
+# handlers file for APACHE
 - name: restart web services
   service:
    name: httpd
