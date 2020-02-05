@@ -18,12 +18,19 @@
    state: present
 - name: creation user jenkins
   user:
-   name: jenkins
-   password: '???'
+   name: jenkins 
+   password: "{{ passwd }}"
    state: present
    system: yes
    create_home: yes
    home: /data/jenkins
+- name: change owner /data/jenkins
+  file:
+   path: /data/jenkins
+   state: directory
+   recurse: yes
+   owner: jenkins
+   group: jenkins
 - name: download jenkins.war
   get_url: 
    url: http://mirrors.jenkins.io/war-stable/latest/jenkins.war
@@ -37,8 +44,4 @@
    state: started
    name: jenkins
    enabled: yes
-#- name:
-#  systemd:
-#   name: jenkins
-#   enabled: yes
 
