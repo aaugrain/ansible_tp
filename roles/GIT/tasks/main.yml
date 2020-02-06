@@ -1,0 +1,10 @@
+---
+# tasks file for GIT
+- name: dl pkg
+  yum:
+   name: https://centos7.iuscommunity.org/ius-release.rpm
+   state: present
+- name: isntall git2
+  yum:
+   name: git2u-all
+   state: present

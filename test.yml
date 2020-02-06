@@ -2,4 +2,4 @@
 - hosts: node
   become: yes
   roles: 
-   - MAVEN
+   - GIT
