@@ -1,6 +1,5 @@
 ---
 # tasks file for APACHE
-
 - name: install httpd
   yum:
    name: httpd
@@ -9,5 +8,9 @@
   template:
    src: switch_port.j2
    dest: /etc/httpd/conf/httpd.conf
-  notify:
-   - restart httpd
+- name: systemctl
+  systemd:
+   name: httpd
+   state: started
+   enabled: yes
+   

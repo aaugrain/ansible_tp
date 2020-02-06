@@ -8,9 +8,9 @@
    path: /usr/lib/jenkins
    state: directory
    mode: '0755'
-- name: creation /data/jenkins
+- name: creation /data/
   file:
-   path: /data/jenkins
+   path: /data/
    state: directory
 - name: creation group jenkins
   group:
@@ -24,13 +24,13 @@
    system: yes
    create_home: yes
    home: /data/jenkins
-- name: change owner /data/jenkins
-  file:
-   path: /data/jenkins
-   state: directory
-   recurse: yes
-   owner: jenkins
-   group: jenkins
+#- name: change owner /data/jenkins
+#  file:
+#   path: /data/jenkins
+#   state: directory
+#   recurse: yes
+#   owner: jenkins
+#   group: jenkins
 - name: download jenkins.war
   get_url: 
    url: http://mirrors.jenkins.io/war-stable/latest/jenkins.war
