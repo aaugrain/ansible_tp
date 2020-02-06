@@ -1,9 +1,9 @@
 --- #Ajout d'un utilisateur ansible et d'un group ansible
-- hosts:    localhost
+- hosts: vagrant
   become:    yes
   vars:
-   username:    ansible
-   groupname:    ansible
+   username:    jenkins
+   groupname:    jenkins
   tasks:
   - name:    create a group
     group:
