@@ -1,4 +1,5 @@
-node ansible_port=2223 ansible_host=192.168.3.187
+node ansible_port=2223 ansible_host=192.168.1.11
+salim ansible_port=9393 ansible_host=192.168.1.115
 
 [vagrant]
 node

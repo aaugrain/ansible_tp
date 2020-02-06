@@ -1,2 +1,15 @@
 ---
 # tasks file for TOMCAT
+- name: install tomcat
+  yum:
+   name: tomcat
+   state: latest
+#- name: template config file switch_port.j2
+#  template:
+#   src: switch_port.j2
+#   dest: /etc/httpd/conf/httpd.conf
+- name: systemctl
+  systemd:
+   name: tomcat
+   state: restarted
+   enabled: yes

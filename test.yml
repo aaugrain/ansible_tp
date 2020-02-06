@@ -1,5 +1,5 @@
 ---
-- hosts: node
+- hosts: salim
   become: yes
   roles: 
-   - GIT
+   - TOMCAT
