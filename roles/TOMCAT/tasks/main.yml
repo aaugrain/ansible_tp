@@ -4,10 +4,10 @@
   yum:
    name: tomcat
    state: latest
-#- name: template config file switch_port.j2
-#  template:
-#   src: switch_port.j2
-#   dest: /etc/httpd/conf/httpd.conf
+ - name: template config file server.xml.j2
+   template:
+    src: server.xml.j2
+    dest: /etc/tomcat/server.xml
 - name: systemctl
   systemd:
    name: tomcat

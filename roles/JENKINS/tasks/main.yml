@@ -41,7 +41,7 @@
    dest: /etc/systemd/system/jenkins.service
 - name: systemctl start jenkins
   systemd:
-   state: started
+   state: restarted
    name: jenkins
    enabled: yes
 
