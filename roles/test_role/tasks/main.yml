@@ -1,9 +1,0 @@
----
-# tasks file for test_role
-- name: copy file in remote
-  copy:
-    src: "{{ item }}"
-    dest: /home/vagrant/
-  with_items: "{{ list }}" 
-    
-

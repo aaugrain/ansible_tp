@@ -1,5 +1,0 @@
----
-# vars file for test_role
-list:
- - create_user.yml
- - vault.txt
