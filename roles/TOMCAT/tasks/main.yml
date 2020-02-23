@@ -4,10 +4,10 @@
   yum:
    name: tomcat
    state: latest
- - name: template config file server.xml.j2
-   template:
-    src: server.xml.j2
-    dest: /etc/tomcat/server.xml
+- name: template config file server.xml.j2
+  template:
+   src: server.xml.j2
+   dest: /etc/tomcat/server.xml
 - name: systemctl
   systemd:
    name: tomcat
