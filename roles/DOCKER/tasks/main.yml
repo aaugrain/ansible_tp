@@ -25,9 +25,12 @@
     state: started
     enabled: yes
 - name: execution docker sans sudo
-  shell:
-    cmd: usermod -aG docker vagrant
-- name: change mode
-  shell:
-    cmd: chmod 777 /var/run/docker.sock  
+  user:
+    name: alex
+    shell: /bin/bash
+    groups: docker
+    append: yes
+#- name: change mode
+#  shell:
+#    cmd: chmod 777 /var/run/docker.sock  
 
