@@ -8,10 +8,8 @@
   yum:
     name: python-pip
     state: present
-- name:
-  pip:
+- pip:
     name: ansible
-- name:
-  pip: 
+- pip: 
     name: docker-py
         
