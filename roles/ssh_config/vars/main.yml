@@ -1,0 +1,9 @@
+---
+# vars file for ssh_config
+user_master: vagrant
+alias_proxy_ssh: proxy
+dns_proxy: proxypic.francecentral.cloudapp.azure.com
+user_proxyssh: stage
+alias_slave: slave
+ip_add_slave: 10.0.1.80
+user_slave: stage

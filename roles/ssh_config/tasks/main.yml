@@ -1,0 +1,19 @@
+---
+- name: créer le fichier config dans le dossier .ssh
+  file:
+    path: '/home/{{ user_master }}/.ssh/config'
+    state: touch
+- name:
+  blockinfile:
+    path: '/home/{{ user_master }}/.ssh/config'
+    state: present
+    block: |
+      Host "{{ alias_proxy_ssh }}"
+        HostName "{{ dns_proxy }}" 
+        User "{{ user_proxyssh }}"
+        IdentityFile "/home/{{ user_master }}/.ssh/id_rsa"
+      Host "{{ alias_slave }}"
+        HostName "{{ ip_add_slave }}"
+        User "{{ user_slave }}"
+        IdentityFile "/home/{{ user_master }}/.ssh/id_rsa"
+        ProxyJump "{{ alias_proxy_ssh }}"

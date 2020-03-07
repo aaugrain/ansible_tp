@@ -1,0 +1,75 @@
+---
+- name: on créé le repo
+  file: 
+    path: /etc/yum.repos.d/mongodb.repo
+    state: touch
+
+- name: on édite le repo
+  blockinfile:
+    path: /etc/yum.repos.d/mongodb.repo
+    state: present
+    block: |
+      [MangoDB]
+      name=MongoDB Repository
+      baseurl=http://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/$basearch/
+      gpgcheck=1
+      enabled=1
+      gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
+
+- name: installation mongodb
+  yum:
+    name: mongodb-org
+    state: present
+
+- name: 
+  template:
+    src: mongo.conf.j2
+    dest: /etc/mongod.conf
+
+- name: installation des dépendances
+  yum:
+    name:
+    - gcc
+    - python-devel
+    - python-setuptools
+    state: present
+
+- name: on installe pymongo
+  easy_install:
+    name: pymongo
+    state: latest
+
+- name:
+  systemd:
+    name: mongod
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+
+- name: on crée un user admin 
+  mongodb_user:
+    database: admin
+    name: admin
+    password: 'mongo'
+    state: present
+    roles: dbAdminAnyDatabase
+    
+- name: on crée un user
+  mongodb_user:
+    login_user: admin
+    login_password: 'mongo'
+    login_database: admin
+    database: customers
+    name: stage
+    password: 'stage'
+    state: present
+    roles: readWrite
+
+- name: on crée le fichier customers.json
+  template:
+    src: customers.j2
+    dest: /home/stage/customers.json
+
+- name: appliquer mongoimport
+  shell: 
+    cmd: mongoimport --db=customers --collection=customer --file=customers.json

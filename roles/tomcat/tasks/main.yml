@@ -1,0 +1,16 @@
+---
+# tasks file for TOMCAT
+- name: install tomcat
+  yum:
+    name: tomcat
+    state: latest
+- name: template config file server.xml.j2
+  template:
+    src: server.xml.j2
+    dest: /etc/tomcat/server.xml
+- name: systemctl
+  systemd:
+    name: tomcat
+    state: restarted
+    daemon_reload: yes
+    enabled: yes

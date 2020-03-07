@@ -1,0 +1,36 @@
+---
+- name: Création du fichier repo
+  file: 
+    path: /etc/yum.repos.d/nginx.repo
+    state: touch
+
+- name: Edition du fichier repo
+  blockinfile:
+    path: /etc/yum.repos.d/nginx.repo
+    state: present
+    block: |
+      [nginx]
+      name=nginx repo
+      baseurl=http://nginx.org/packages/mainline/centos/7/$basearch/
+      gpgcheck=0
+      enabled=1
+
+- name: installation du serveur nginx
+  yum:
+    name: nginx
+    state: present
+
+- name: édition fichier conf.d pour le reverse proxy
+  template:
+    src: conf.j2
+    dest:  /etc/nginx/conf.d/default.conf
+
+- name:
+  shell: 'setsebool httpd_can_network_connect 1 -P'
+
+- name: redémarrer le service et le rendre effectif au demarrage
+  service: 
+    name: nginx
+    dameon_reload: yes
+    state: restarted
+    enabled: yes
